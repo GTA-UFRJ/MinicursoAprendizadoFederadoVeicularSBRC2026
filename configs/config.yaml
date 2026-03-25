@@ -1,0 +1,33 @@
+simulation:
+        cars: 5
+        mobility:
+                distance:
+                        x: 600
+                        y: 600       
+                repetitions: 3
+        communication:
+                repetitions: 3
+        speed:
+                index: 
+                        - 0
+                value:
+                        - 13.88889 # 50 km/h
+        model:
+                name: 
+                        - "RESNET10"
+        data:
+                name:  "SIGN"
+                alpha: 5.0
+
+        federated_learning:
+                server:
+                        strategie: "fedavg"
+                        rounds: 10
+                        ip: "0.0.0.0"
+                        port: "8081"
+                client:
+                        local_epochs: 5
+        base_station:
+                range: 1200
+                positions: "configs/base_stations.csv"
+
