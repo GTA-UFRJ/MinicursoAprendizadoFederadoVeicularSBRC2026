@@ -1,5 +1,5 @@
 simulation:
-        cars: 5
+        cars: 2
         mobility:
                 distance:
                         x: 600
@@ -18,10 +18,15 @@ simulation:
         data:
                 name:  "SIGN"
                 alpha: 5.0
+                shape: 32,32,3
+                n_classes: 10
 
         federated_learning:
                 server:
-                        strategie: "fedavg"
+                        log_path: "logs/server/flwr/"
+                        model_path: "models/server/flwr/"
+                        time_path: "results/server/flwr"
+                        strategy: "fedavg"
                         rounds: 10
                         ip: "0.0.0.0"
                         port: "8081"
