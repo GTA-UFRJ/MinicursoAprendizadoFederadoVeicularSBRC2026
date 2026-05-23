@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-03-24 20:03:47.466733 by randomTrips.py UNKNOWN
+<configuration>
+    <net-file value="/home/gta/airam/MinicursoAprendizadoFederadoVeicularSBRC2026/mobility/raw/scenarios/0/manhattan_net_2.xml"/>
+    <output-trip-file value="/home/gta/airam/MinicursoAprendizadoFederadoVeicularSBRC2026/mobility/raw/scenarios/0/Krauss/5/flows_file_Krauss_5_1.xml"/>
+    <trip-attributes value="departPos=&quot;random&quot; departSpeed=&quot;max&quot;"/>
+    <seed value="1"/>
+    <random value="True"/>
+    <jtrrouter value="True"/>
+    <end value="1.0"/>
+    <flows value="5"/>
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <flow id="0" begin="0" end="1" period="5" from="A1A0" departPos="random" departSpeed="max"/>
+    <flow id="1" begin="0" end="1" period="5" from="A1B1" departPos="random" departSpeed="max"/>
+    <flow id="2" begin="0" end="1" period="5" from="B0A0" departPos="random" departSpeed="max"/>
+    <flow id="3" begin="0" end="1" period="5" from="B0B1" departPos="random" departSpeed="max"/>
+    <flow id="4" begin="0" end="1" period="5" from="A1A0" departPos="random" departSpeed="max"/>
+</routes>
