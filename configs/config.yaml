@@ -15,6 +15,7 @@ simulation:
         model:
                 name: 
                         - "RESNET10"
+                size: 500
         data:
                 name:  "SIGN"
                 alpha: 5.0
@@ -30,6 +31,7 @@ simulation:
                         rounds: 10
                         ip: "0.0.0.0"
                         port: "8081"
+                        n_clients_selected: 5
                 client:
                         local_epochs: 5
         base_station:
