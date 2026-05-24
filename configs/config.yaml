@@ -1,5 +1,5 @@
 simulation:
-        cars: 2
+        cars: 3
         mobility:
                 distance:
                         x: 600
@@ -13,14 +13,14 @@ simulation:
                 value:
                         - 13.88889 # 50 km/h
         model:
-                name: 
-                        - "RESNET10"
+                name: "RESNET10"
                 size: 500
         data:
                 name:  "SIGN"
                 alpha: 5.0
                 shape: 32,32,3
                 n_classes: 10
+                path: 
 
         federated_learning:
                 server:
@@ -31,7 +31,7 @@ simulation:
                         rounds: 10
                         ip: "0.0.0.0"
                         port: "8081"
-                        n_clients_selected: 5
+                        n_clients_selected: 3
                 client:
                         local_epochs: 5
         base_station:

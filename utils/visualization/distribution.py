@@ -6,8 +6,6 @@ import numpy as np
 from pickle import load
 from torch.utils.data import Dataset
 
-from .legends import set_fontsize
-
 def distribution_plot(number_of_clients:int=50,
                       number_of_classes:int=43,
                       dataset_name:str="SIGN",
@@ -62,7 +60,9 @@ def distribution_plot(number_of_clients:int=50,
     plt.ylabel('ID do Cliente')
     plt.grid(True, linestyle=':', alpha=0.3)
 
-    set_fontsize(plt)
+    
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
 
     # verify path
     figure_name = f"figures/data/distributions/{dataset_name}_nclients_{number_of_clients}_alpha_{alpha}"
