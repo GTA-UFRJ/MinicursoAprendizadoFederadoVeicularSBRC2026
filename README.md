@@ -12,6 +12,20 @@ Este repositório implementa a atividade prática desenvolvida para o Minicurso 
 }
 ```
 
+# Instalação Conda
+
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+```
+
+```bash
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+```
+
+```bash
+./Miniconda3-latest-Linux-x86_64.sh
+```
+
 # Preparação do Ambiente de Execução
 
 Criar o ambiente de execução:
