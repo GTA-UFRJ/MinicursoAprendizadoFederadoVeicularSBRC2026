@@ -12,8 +12,6 @@ Este repositório implementa a atividade prática desenvolvida para o Minicurso 
 }
 ```
 
-# Organização do Código
-
 # Preparação do Ambiente de Execução
 
 Criar o ambiente de execução:
@@ -27,17 +25,3 @@ Carregar o conjunto de dados:
 ```bash
     source scripts/build/datasets.sh
 ```
-
-# Heterogeneidade de Dados
-
-# Heterogeneidade de Dispositivos
-
-# Mobilidade dos Clientes
-
-# Canal de Comunicação
-
-# Visualização dos Dados Gerados
-
-# Adapatação do Arcabouço Flower
-
-
