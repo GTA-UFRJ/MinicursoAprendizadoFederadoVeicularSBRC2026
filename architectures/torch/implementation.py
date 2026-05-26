@@ -31,7 +31,7 @@ def build_model(features_shape:int=3,
 
     model = criterion = optimizer = device = scheduler = None
 
-    device = allocate_cuda()
+    device = "cuda:0"
      
     if model_name == "RESNET18":
 

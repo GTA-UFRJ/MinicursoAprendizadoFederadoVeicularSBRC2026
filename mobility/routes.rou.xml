@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2026-05-24 03:28:01.484823 by randomTrips.py UNKNOWN
+<!-- generated on 2026-05-26 01:51:21.410844 by randomTrips.py UNKNOWN
 <configuration>
     <net-file value="/home/gta/airam/MinicursoAprendizadoFederadoVeicularSBRC2026/mobility/raw/scenarios/0/manhattan_net_2.xml"/>
     <output-trip-file value="/home/gta/airam/MinicursoAprendizadoFederadoVeicularSBRC2026/mobility/raw/scenarios/0/Krauss/3/flows_file_Krauss_3_2.xml"/>
@@ -13,7 +13,7 @@
 </configuration>
 -->
 
-<!-- generated on 2026-05-24 03:28:01 by Eclipse SUMO duarouter Version 1.24.0
+<!-- generated on 2026-05-26 01:51:21 by Eclipse SUMO duarouter Version 1.24.0
 <duarouterConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
 
     <input>
@@ -42,12 +42,12 @@
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
     <vehicle id="0.0" depart="0.00" departPos="random" departSpeed="max">
-        <route edges="A0B0"/>
+        <route edges="B0B1"/>
     </vehicle>
     <vehicle id="1.0" depart="0.00" departPos="random" departSpeed="max">
-        <route edges="A0B0"/>
+        <route edges="A1B1"/>
     </vehicle>
     <vehicle id="2.0" depart="0.00" departPos="random" departSpeed="max">
-        <route edges="A1A0"/>
+        <route edges="A1B1"/>
     </vehicle>
 </routes>

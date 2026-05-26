@@ -19,7 +19,7 @@ simulation:
                 name:  "SIGN"
                 alpha: 5.0
                 shape: 32,32,3
-                n_classes: 10
+                n_classes: 43
                 path: 
 
         federated_learning:
@@ -30,7 +30,7 @@ simulation:
                         strategy: "fedavg"
                         rounds: 10
                         ip: "0.0.0.0"
-                        port: "8081"
+                        port: "8399"
                         n_clients_selected: 3
                 client:
                         local_epochs: 5

@@ -72,7 +72,21 @@ class FLClient(fl.client.NumPyClient):
         state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
         self.model.load_state_dict(state_dict, strict=True)
 
+    # Implementar a função para o download de modelos
+    def download_model(self):
 
+        return 0
+
+    # Implementar a função para o upload de modelos
+    def upload_model(self):
+
+        return 0
+
+    # Implementar a função para o cálculo do atraso computacional
+    def computational_time(self):
+
+        return 0
+    
     def get_properties(self, 
                        config):
 
@@ -81,7 +95,12 @@ class FLClient(fl.client.NumPyClient):
     def fit(self, 
             parameters, 
             config):
-                
+
+        communication_time = 0
+        
+        self.logger.debug("determine client's communication time to upload the model")
+        communication_time += self.download_model()
+        
         self.logger.debug("updating model parameters")
         self.set_weights(parameters)
 
@@ -96,13 +115,15 @@ class FLClient(fl.client.NumPyClient):
                      self.logger)
 
         self.logger.debug("determine client's computational time")
-        # TODO: implement the loading time here
+        computational_time = computational_time()
 
-        self.logger.debug("determine client's communication time")
-        # TODO: implement the loading time here
+        self.logger.debug("determine client's communication time to upload the model")
+        communication_time += self.upload_model()
+
+        total_training_time = computational_time + communication_time
         
         self.logger.debug(f'sending parameters to server: model_weights, len(train): {self.train_size}')
-        return self.get_weights(), len(self.trainloader.dataset), {'loss':loss, "cid":self.cid}
+        return self.get_weights(), len(self.trainloader.dataset), {'loss':loss, "cid":self.cid, "training_time":total_training_time}
 
     def evaluate(self, 
                  parameters, 
@@ -122,3 +143,4 @@ class FLClient(fl.client.NumPyClient):
 
         self.logger.debug(f'sending parameters to server: loss {loss}, len(test): {self.test_size} accuracy: {float(accuracy)}')
         return loss, self.test_size, {"accuracy": float(accuracy), "cid":self.cid}
+

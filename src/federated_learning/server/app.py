@@ -36,32 +36,18 @@ time_path = cfg['simulation']['federated_learning']['server']['time_path']
 DATASET = cfg['simulation']['data']['name']
 alpha = cfg['simulation']['data']['alpha']
 MODEL = cfg['simulation']['model']['name']
+LOG_PATH = 'logs/server/flwr/'
+n_classes = cfg['simulation']['data']['n_classes']
+features_shape = int(cfg['simulation']['data']['shape'][-1])
 
 os.makedirs(server_log_path, 
             exist_ok=True)
 
 message_length = 800 * 1024 * 1024
 
-props = torch.cuda.get_device_properties(device=None)
-total_memory = props.total_memory
-client_memory = 1024 * 1024 * 1024 # 1 GB for the server
-memory_percentage = client_memory/total_memory
-torch.cuda.set_per_process_memory_fraction(memory_percentage, 
-                                           device=None)
-
-
-logger = create_logger_server(log_path=server_log_path+aggregation)
-
-logger.debug(f"Execution path: {os.getcwd()}.")
-
-logger.debug(f"starting training with aggregation strategy {aggregation}, {num_clients} available clients, selecting {num_clients_fit} to fit, during {num_rounds} global epochs")
-
-message_length = 800 * 1024 * 1024
+logger = create_logger_server(LOG_PATH)
 
 # Initialize model parameters
-n_classes = cfg['datasets'][DATASET]['classes']
-features_shape = int(cfg['datasets'][DATASET]['features'][-1])
-
 model, _, _, _, _ = build_model(features_shape=features_shape, 
                                 labels_shape=n_classes,
                                 model_name=MODEL,
@@ -69,22 +55,20 @@ model, _, _, _, _ = build_model(features_shape=features_shape,
 
 ndarrays = get_weights(model)
 
+message_length = 800 * 1024 * 1024
+
 parameters = ndarrays_to_parameters(ndarrays)
 
-
 strategy = FedAvg(min_available_clients=num_clients,
-                    min_fit_clients=num_clients_fit,
-                    min_evaluate_clients=num_clients,
-                    fraction_fit=0.01,
-                    fraction_evaluate=0.01,
-                    logger=logger,
-                    initial_parameters=parameters,
-                    time_path=time_path)
+                  min_fit_clients=num_clients_fit,
+                  min_evaluate_clients=num_clients,
+                  fraction_fit=0.01,
+                  fraction_evaluate=0.01,
+                  logger=logger,
+                  initial_parameters=parameters,
+                  time_path=time_path)        
 
 fl.server.start_server(config=fl.server.ServerConfig(num_rounds=num_rounds),
                        server_address=server_ip+":"+server_port,
                        strategy=strategy,
                        grpc_max_message_length=message_length)
-
-
-
