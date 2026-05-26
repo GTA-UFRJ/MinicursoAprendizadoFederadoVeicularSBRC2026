@@ -31,7 +31,7 @@ def build_model(features_shape:int=3,
 
     model = criterion = optimizer = device = scheduler = None
 
-    device = "cuda:0"
+    device = "cuda:1"
      
     if model_name == "RESNET18":
 
@@ -164,8 +164,7 @@ def train(model,
           criterion,
           scheduler,
           device,
-          trainloader,
-          logger):
+          trainloader):
     
     model.train()
     running_loss = 0.0
@@ -188,10 +187,6 @@ def train(model,
                 optimizer.step()
     
                 running_loss += loss.item()
-
-            else:
-
-                logger.debug(f'data batch size less than 2: {len(data[0])}')
     
     scheduler.step()
 
@@ -203,8 +198,7 @@ def train(model,
 def evaluate(model,
              device,
              criterion,
-             testloader,
-             logger=None):
+             testloader):
 
     model.eval()
     loss = 0.0

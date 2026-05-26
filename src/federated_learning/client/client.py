@@ -21,7 +21,6 @@ class FLClient(fl.client.NumPyClient):
                  model_path="",
                  result_path="",
                  computation_time_path="",
-                 logger=None,
                  optimizer=None,
                  criterion=None,
                  scheduler=None,
@@ -37,7 +36,6 @@ class FLClient(fl.client.NumPyClient):
         self.model_path = model_path+model_name+'/'
         self.result_path = result_path+model_name+'/'
         self.time_path = computation_time_path+model_name+'/'
-        self.logger = logger
         self.global_epoch = 0
         
         # identifiers
@@ -98,49 +96,44 @@ class FLClient(fl.client.NumPyClient):
 
         communication_time = 0
         
-        self.logger.debug("determine client's communication time to upload the model")
+        # determine client's communication time to upload the model
         communication_time += self.download_model()
         
-        self.logger.debug("updating model parameters")
+        # updating model parameters
         self.set_weights(parameters)
 
-        self.logger.debug("training model")
+        # training model
         loss = train(self.model, 
                      self.i_epochs, 
                      self.optimizer, 
                      self.criterion,
                      self.scheduler,
                      self.device,
-                     self.trainloader,
-                     self.logger)
+                     self.trainloader)
 
-        self.logger.debug("determine client's computational time")
-        computational_time = computational_time()
+        # determine client's computational time
+        computational_time = self.computational_time()
 
-        self.logger.debug("determine client's communication time to upload the model")
+        # determine client's communication time to upload the model
         communication_time += self.upload_model()
 
         total_training_time = computational_time + communication_time
         
-        self.logger.debug(f'sending parameters to server: model_weights, len(train): {self.train_size}')
+        # sending parameters to server
         return self.get_weights(), len(self.trainloader.dataset), {'loss':loss, "cid":self.cid, "training_time":total_training_time}
 
     def evaluate(self, 
                  parameters, 
                  config):
         
-        self.logger.debug(f'evaluating model')  
-        
-        self.logger.debug("updating model parameters")
+        # setting model weights
         self.set_weights(parameters)
  
-        self.logger.debug("evaluating model")
+        # evaluating model
         accuracy, loss = evaluate(self.model,
                                   self.device,
                                   self.criterion,
-                                  self.testloader,
-                                  self.logger)
-
-        self.logger.debug(f'sending parameters to server: loss {loss}, len(test): {self.test_size} accuracy: {float(accuracy)}')
+                                  self.testloader)
+        
         return loss, self.test_size, {"accuracy": float(accuracy), "cid":self.cid}
 
